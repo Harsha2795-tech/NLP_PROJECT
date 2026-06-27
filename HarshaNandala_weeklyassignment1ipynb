@@ -1,0 +1,1133 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyP01DnP6DgYHFOdADKWVLns",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Harsha2795-tech/NLP_PROJECT/blob/main/HarshaNandala_weeklyassignment1ipynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Section A – Theory (1-10\n",
+        "1)  == checks whether two objects have the same value.\n",
+        "     Is checks whether two variables refer to the same object in memory.\n",
+        "Example:\n",
+        "a= [1,2,3]\n",
+        "b= [1,2,3]\n",
+        "print(a==b)\n",
+        "print(a is b)\n",
+        "both lists contain the same elements, so == returns True. They are stored at different memory locations, so is returns False.\n",
+        "\n",
+        "2) Mutable vs Immutable\n",
+        "Data Type\n",
+        "List -  Mutable\n",
+        "Tuple -  Immutable\n",
+        "Set -  Mutable\n",
+        "Dict -  Mutable\n",
+        "Str -  Immutabel\n",
+        "Int -  Immutable\n",
+        "Float -  Immutable\n",
+        "Bool -  Immutable\n",
+        "Frozenset -  Immutable\n",
+        "Immutability matters because immutable objects cannot be changed after creation, making programs safer, more predictable and suitable as dictionary keys.\n",
+        "\n",
+        "3)\n",
+        "Predicted output – False\n",
+        "It is because floating-point numbers are stored in binary approximation. Since 0.1 and 0.2 cannot be represented exactly, their sum becomes 0.3000000000004 which is not exactly 0.3. It is not a Python bug, but a limitation of floating-point representation.\n",
+        "\n",
+        "4)\n",
+        "Situation 1- Strong coordinates\n",
+        "Location=(17.3850, 78.4867)\n",
+        "Coordinates never change, so tuple is appropriate.\n",
+        "Situation 2- Dictionary keys\n",
+        "D={(1,2): ‘Point”}\n",
+        "Lists cannot be dictionary keys because they are mutable.\n",
+        "Situation 3- Returning multiple values\n",
+        "Def student():\n",
+        "Return(“Harsha”, 21)\n",
+        "Functions naturally return tuples because returned values usually shouldn’t change.\n",
+        "\n",
+        "5)\n",
+        "Without using “hash”, a dictionary knows exactly where each item is stored using an internal indexing mechanism, so it jumps directly to the required value instead of checking every element one by one. A list must compare every until it finds the desired one.\n",
+        "Using the word “hash”, a dictionary converts the key into a hash value, which directly points to the memory location where the value is stored. Therefore lookup is approximately O(1). Lists require sequential searching, giving  O(n) complexity.\n",
+        "\n",
+        "\n",
+        "6)\n",
+        "range() returns a range object, supports only integer steps, and is usually used in loops whereas numpy.arange() returns a numpy array, supports integer and float steps, it is used for numerical and array operations.\n",
+        "\n",
+        "\n",
+        "7)\n",
+        "a = [1,2,3] and x = [4,5]\n",
+        "a.append(x) = [1,2,3,[4,5]]\n",
+        "a.extend(x)= [1,2,3,4,5]\n",
+        "a.insert(2,x) = [1,2,[4,5],3]\n",
+        "\n",
+        "\n",
+        "8)\n",
+        "a, *b, c = [10,20,30,40,50], output is a = 10, *b = [20,30,40], c = 50\n",
+        "a, *b, c = [10,20], output is a = 10, *b = [], c = 20\n",
+        "a, *b, c = [10], output is error.\n",
+        "\n",
+        "\n",
+        "9)\n",
+        "Input (-7,2)\n",
+        "Output:\n",
+        "for /, -3.5\n",
+        "for //, -4\n",
+        "for %, 1\n",
+        "for **, 49\n",
+        "\n",
+        "\n",
+        "10)\n",
+        "numpy stores data in contiguous memory, making access much faster. It performs operations using optimized C code instead of Python loops. numpy arrays store elements of the same data type, reducing memory usage and improving computation speed.\n",
+        "\n",
+        "\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "m6pRwMjHBL6c"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#11)\n",
+        "matrix1 = [[0] * 3 for _ in range(3)]\n",
+        "matrix2 = [[0] * 3] * 3\n",
+        "matrix1[0][0] = 99\n",
+        "matrix2[0][0] = 99\n",
+        "print(matrix1)\n",
+        "print(matrix2)"
+      ],
+      "metadata": {
+        "id": "vTvUALZDELWu"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "In matrix 1, Every iteration creates a new independent list whereas in matrix 2, only first row is created and same row is copied 3 times as reference."
+      ],
+      "metadata": {
+        "id": "Y9YNCgTpFLYL"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#12)\n",
+        "x = [1, 2, 3]\n",
+        "y = x\n",
+        "x = x + [4]\n",
+        "print(\"x =\", x)\n",
+        "print(\"y =\", y)\n",
+        "a = [1, 2, 3]\n",
+        "b = a\n",
+        "a += [4]\n",
+        "print(\"a =\", a)\n",
+        "print(\"b =\", b)"
+      ],
+      "metadata": {
+        "id": "qQsX1rzWEVKJ"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "When x = x + [4], then python creates a new list and adds the new to old list whereas a += [4], here python adds 4 to the existing list."
+      ],
+      "metadata": {
+        "id": "n0ATx0q_FO7B"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#13)\n",
+        "for i in range(5):\n",
+        "    pass\n",
+        "print(i)\n",
+        "\n",
+        "j = None\n",
+        "for j in range(0):\n",
+        "    pass\n",
+        "print(j)\n"
+      ],
+      "metadata": {
+        "id": "2ZzksBKeEaPs"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "For i, the last value assigned is 4 whereas for j, there is no value assigned as the loop never gets executed and gives an error."
+      ],
+      "metadata": {
+        "id": "o0H8-78wFg6J"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#14)\n",
+        "print(\"10\" + \"20\")\n",
+        "print(10 + 20)\n",
+        "print(\"10\" * 3)\n",
+        "print(10 * \"3\")\n",
+        "print(int(\"10\") + 20)\n",
+        "print(int(\"10\") + 20)\n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "hrxx-rZ7EfLz"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "In line 5, there is a addition operator for a integer and a string which is not possible and gives an error."
+      ],
+      "metadata": {
+        "id": "QT4pkxQyFkUb"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#15)\n",
+        "print(0 or 5)\n",
+        "print(5 or 0)\n",
+        "print(None or \"hello\")\n",
+        "print(0 and 5)\n",
+        "print(5 and 10)\n",
+        "print([] or \"default\")\n",
+        "print([0] or \"default\")"
+      ],
+      "metadata": {
+        "id": "KMdaoNG5Ej7J"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Short-circuit evaluation means Python stops evaluating an expression as soon as the result is determined. 'or' returns first true value while 'and' returns first false value."
+      ],
+      "metadata": {
+        "id": "KwyzBATyFrwq"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#16)\n",
+        "a = 10\n",
+        "b = 20\n",
+        "\n",
+        "#arithmetic\n",
+        "a = a + b\n",
+        "b = a - b\n",
+        "a = a - b\n",
+        "print(\"a =\", a)\n",
+        "print(\"b =\", b)\n",
+        "\n",
+        "#XOR\n",
+        "a = a ^ b\n",
+        "b = a ^ b\n",
+        "a = a ^ b\n",
+        "print(a, b)\n",
+        "\n",
+        "#Tuple unpacking\n",
+        "a, b = b, a\n",
+        "print(a, b)"
+      ],
+      "metadata": {
+        "id": "NEylsUBjEwyr"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Tuple unpacking is most pyhtonic as it is shortest, easy to read and there is no arithmetic or bitwise operations."
+      ],
+      "metadata": {
+        "id": "RePNRTsqF5ky"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#17)\n",
+        "price = int(input('enter the price: '))\n",
+        "quantity = int(input('enter the quantity: '))\n",
+        "subtotal = price * quantity\n",
+        "gst = subtotal * 0.18\n",
+        "if subtotal < 500:\n",
+        "    delivery = 40\n",
+        "else:\n",
+        "    delivery = 0\n",
+        "total = subtotal + gst + delivery\n",
+        "print(f\"Subtotal: ₹{subtotal:.2f}\")\n",
+        "print(f\"GST (18%): ₹{gst:.2f}\")\n",
+        "print(f\"Delivery: ₹{delivery:.2f}\")\n",
+        "print(f\"Total: ₹{total:.2f}\")"
+      ],
+      "metadata": {
+        "id": "-1rIJYUVF_SN"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#18)\n",
+        "temp = float(input(\"Enter temperature: \"))\n",
+        "unit = input(\"Enter unit (C/F): \").upper()\n",
+        "\n",
+        "if unit == \"C\":\n",
+        "    result = (temp * 9/5) + 32\n",
+        "    print(f\"{result:.2f} °F\")\n",
+        "\n",
+        "elif unit == \"F\":\n",
+        "    result = (temp - 32) * 5/9\n",
+        "    print(f\"{result:.2f} °C\")\n",
+        "\n",
+        "else:\n",
+        "    print(\"Invalid Unit\")"
+      ],
+      "metadata": {
+        "id": "Q89SIryNGMH6"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#19)\n",
+        "num = int(input(\"Enter a 4-digit number: \"))\n",
+        "d1 = num % 10\n",
+        "num = num // 10\n",
+        "d2 = num % 10\n",
+        "num = num // 10\n",
+        "d3 = num % 10\n",
+        "num = num // 10\n",
+        "d4 = num % 10\n",
+        "sum_digits = d1 + d2 + d3 + d4\n",
+        "print(\"Sum =\", sum_digits)"
+      ],
+      "metadata": {
+        "id": "J8Kvf5xPGTRu"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#20)\n",
+        "value = input(\"Enter something: \")\n",
+        "try:\n",
+        "    value = int(value)\n",
+        "    print(value, type(value))\n",
+        "except:\n",
+        "    try:\n",
+        "        value = float(value)\n",
+        "        print(value, type(value))\n",
+        "    except:\n",
+        "        print(value, type(value))"
+      ],
+      "metadata": {
+        "id": "rmAPYHCxGY7m"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#21)\n",
+        "income = float(input(\"Enter annual income: \"))\n",
+        "tax = 0\n",
+        "if income > 1500000:\n",
+        "    tax += (income - 1500000) * 0.30\n",
+        "    income = 1500000\n",
+        "if income > 1200000:\n",
+        "    tax += (income - 1200000) * 0.20\n",
+        "    income = 1200000\n",
+        "if income > 1000000:\n",
+        "    tax += (income - 1000000) * 0.15\n",
+        "    income = 1000000\n",
+        "if income > 700000:\n",
+        "    tax += (income - 700000) * 0.10\n",
+        "    income = 700000\n",
+        "if income > 300000:\n",
+        "    tax += (income - 300000) * 0.05\n",
+        "print(\"Total Tax = ₹\", tax)"
+      ],
+      "metadata": {
+        "id": "3W6XjECsGeI4"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#22)\n",
+        "pan = input(\"Enter PAN: \")\n",
+        "if len(pan) != 10:\n",
+        "    print(\"Invalid PAN - Length should be 10\")\n",
+        "elif not pan[:5].isalpha() or not pan[:5].isupper():\n",
+        "    print(\"Invalid PAN - First five should be uppercase letters\")\n",
+        "elif not pan[5:9].isdigit():\n",
+        "    print(\"Invalid PAN - Middle four should be digits\")\n",
+        "elif not pan[9].isalpha() or not pan[9].isupper():\n",
+        "    print(\"Invalid PAN - Last character should be uppercase letter\")\n",
+        "else:\n",
+        "    print(\"Valid PAN\")"
+      ],
+      "metadata": {
+        "id": "Y-K6l-ApGjUA"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#23)\n",
+        "units = float(input(\"Enter units: \"))\n",
+        "bill = 0\n",
+        "if units > 200:\n",
+        "    bill += (units-200)*8.15\n",
+        "    units = 200\n",
+        "if units >100:\n",
+        "    bill += (units-100)*7.10\n",
+        "    units =100\n",
+        "if units >50:\n",
+        "    bill += (units-50)*5.55\n",
+        "    units =50\n",
+        "bill += units*4.10\n",
+        "fixed =110\n",
+        "subtotal = bill + fixed\n",
+        "tax = subtotal*0.06\n",
+        "total = subtotal + tax\n",
+        "print(\"Energy Charges :\", bill)\n",
+        "print(\"Fixed Charge :\", fixed)\n",
+        "print(\"Government Tax :\", tax)\n",
+        "print(\"Total Bill :\", total)"
+      ],
+      "metadata": {
+        "id": "pFZ2CSgcGnpO"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#24)\n",
+        "runs = int(input(\"Runs : \"))\n",
+        "balls = int(input(\"Balls : \"))\n",
+        "if balls == 0:\n",
+        "    print(\"Strike rate cannot be calculated\")\n",
+        "else:\n",
+        "    sr = (runs/balls)*100\n",
+        "    print(\"Strike Rate =\", round(sr,2))\n",
+        "    if sr >150:\n",
+        "        print(\"Explosive\")\n",
+        "    elif sr >100:\n",
+        "        print(\"Aggressive\")\n",
+        "    elif sr >=75:\n",
+        "        print(\"Steady\")\n",
+        "    else:\n",
+        "        print(\"Defensive\")"
+      ],
+      "metadata": {
+        "id": "3xl3BjaIGthB"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#25)\n",
+        "weight = float(input(\"Weight (kg): \"))\n",
+        "height = float(input(\"Height (cm): \"))\n",
+        "height = height/100\n",
+        "bmi = weight/(height**2)\n",
+        "print(\"BMI =\", round(bmi,2))\n",
+        "if bmi <18.5:\n",
+        "    print(\"Underweight\")\n",
+        "elif bmi <=22.9:\n",
+        "    print(\"Normal\")\n",
+        "elif bmi <=24.9:\n",
+        "    print(\"Overweight\")\n",
+        "elif bmi <=29.9:\n",
+        "    print(\"Obese Class I\")\n",
+        "else:\n",
+        "    print(\"Obese Class II\")"
+      ],
+      "metadata": {
+        "id": "sQb_gy_EG8FY"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#26)\n",
+        "N = int(input(\"Enter N: \"))\n",
+        "for i in range(1, N + 1):\n",
+        "    for j in range(1, i + 1):\n",
+        "        print(j, end=\" \")\n",
+        "    print()"
+      ],
+      "metadata": {
+        "id": "hjU8qfHBHPgn"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#27)\n",
+        "N = int(input(\"Enter N: \"))\n",
+        "# Upper half\n",
+        "for i in range(1, N + 1):\n",
+        "    print(\"  \" * (N - i), end=\"\")\n",
+        "    for j in range(1, i + 1):\n",
+        "        print(j, end=\" \")\n",
+        "    for j in range(i - 1, 0, -1):\n",
+        "        print(j, end=\" \")\n",
+        "    print()\n",
+        "# Lower half\n",
+        "for i in range(N - 1, 0, -1):\n",
+        "    print(\"  \" * (N - i), end=\"\")\n",
+        "    for j in range(1, i + 1):\n",
+        "        print(j, end=\" \")\n",
+        "    for j in range(i - 1, 0, -1):\n",
+        "        print(j, end=\" \")\n",
+        "    print()"
+      ],
+      "metadata": {
+        "id": "eE4b8j9eHarL"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#28)\n",
+        "N = int(input(\"Enter N: \"))\n",
+        "for i in range(N):\n",
+        "    for j in range(N):\n",
+        "        if i == 0 or i == N - 1 or j == 0 or j == N - 1:\n",
+        "            print(\"*\", end=\" \")\n",
+        "        else:\n",
+        "            print(\" \", end=\" \")\n",
+        "    print()"
+      ],
+      "metadata": {
+        "id": "qYrsrqkmHfpt"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#29)\n",
+        "rows = 5\n",
+        "for i in range(rows):\n",
+        "    value = 1\n",
+        "    for j in range(i + 1):\n",
+        "        print(value, end=\" \")\n",
+        "        value = value * (i - j) // (j + 1)\n",
+        "    print()"
+      ],
+      "metadata": {
+        "id": "NhUVwvx8HkHv"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#30)\n",
+        "N = int(input(\"Enter N: \"))\n",
+        "for i in range(1, N + 1):\n",
+        "    for j in range(i):\n",
+        "        print(chr(65 + j), end=\" \")\n",
+        "    print()"
+      ],
+      "metadata": {
+        "id": "pMW1H4x4HtSD"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#31)\n",
+        "count = 0\n",
+        "for num in range(1, 10000):\n",
+        "    temp = num\n",
+        "    digits = len(str(num))\n",
+        "    total = 0\n",
+        "    while temp > 0:\n",
+        "        digit = temp % 10\n",
+        "        total += digit ** digits\n",
+        "        temp //= 10\n",
+        "    if total == num:\n",
+        "        print(num, end=\" \")\n",
+        "        count += 1\n",
+        "print(\"\\nTotal Armstrong Numbers =\", count)"
+      ],
+      "metadata": {
+        "id": "N38tnvIJH0AE"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#32)\n",
+        "N = int(input(\"Enter N: \"))\n",
+        "a = 0\n",
+        "b = 1\n",
+        "total = 0\n",
+        "for i in range(N):\n",
+        "    print(a, end=\" \")\n",
+        "    total += a\n",
+        "    a, b = b, a + b\n",
+        "print(\"\\nSum =\", total)"
+      ],
+      "metadata": {
+        "id": "z1mrcFEIH8Af"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#33)\n",
+        "N = int(input(\"Enter Number: \"))\n",
+        "isPrime = True\n",
+        "if N < 2:\n",
+        "    isPrime = False\n",
+        "else:\n",
+        "    for i in range(2, int(N**0.5) + 1):\n",
+        "        if N % i == 0:\n",
+        "            isPrime = False\n",
+        "            break\n",
+        "if isPrime:\n",
+        "    print(\"Prime\")\n",
+        "else:\n",
+        "    print(\"Not Prime\")\n",
+        "sumPrime = 0\n",
+        "for num in range(2, N + 1):\n",
+        "    prime = True\n",
+        "    for i in range(2, int(num**0.5) + 1):\n",
+        "        if num % i == 0:\n",
+        "            prime = False\n",
+        "            break\n",
+        "    if prime:\n",
+        "        sumPrime += num\n",
+        "print(\"Sum =\", sumPrime)"
+      ],
+      "metadata": {
+        "id": "qDh4n7PdIAD-"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#34)\n",
+        "num = int(input(\"Enter Number: \"))\n",
+        "if num < 0:\n",
+        "    print(\"Not Palindrome\")\n",
+        "else:\n",
+        "    original = num\n",
+        "    reverse = 0\n",
+        "    while num > 0:\n",
+        "        digit = num % 10\n",
+        "        reverse = reverse * 10 + digit\n",
+        "        num //= 10\n",
+        "    print(\"Reverse =\", reverse)\n",
+        "    if reverse == original:\n",
+        "        print(\"Palindrome\")\n",
+        "    else:\n",
+        "        print(\"Not Palindrome\")"
+      ],
+      "metadata": {
+        "id": "gNLEYuBSIFNh"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#35)\n",
+        "a = int(input(\"Enter First Number: \"))\n",
+        "b = int(input(\"Enter Second Number: \"))\n",
+        "x = a\n",
+        "y = b\n",
+        "while y != 0:\n",
+        "    x, y = y, x % y\n",
+        "hcf = x\n",
+        "lcm = (a * b) // hcf\n",
+        "print(\"HCF =\", hcf)\n",
+        "print(\"LCM =\", lcm)"
+      ],
+      "metadata": {
+        "id": "3TuhMTmMINcA"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#36)\n",
+        "text = input(\"Enter a sentence: \")\n",
+        "characters = len(text)\n",
+        "words = 0\n",
+        "vowels = 0\n",
+        "consonants = 0\n",
+        "digits = 0\n",
+        "spaces = 0\n",
+        "special = 0\n",
+        "in_word = False\n",
+        "for ch in text:\n",
+        "    if ch != \" \" and not in_word:\n",
+        "        words += 1\n",
+        "        in_word = True\n",
+        "    elif ch == \" \":\n",
+        "        spaces += 1\n",
+        "        in_word = False\n",
+        "    if ch.lower() in \"aeiou\":\n",
+        "        vowels += 1\n",
+        "    elif ch.isalpha():\n",
+        "        consonants += 1\n",
+        "    elif ch.isdigit():\n",
+        "        digits += 1\n",
+        "    elif ch != \" \":\n",
+        "        special += 1\n",
+        "print(\"Characters :\", characters)\n",
+        "print(\"Words :\", words)\n",
+        "print(\"Vowels :\", vowels)\n",
+        "print(\"Consonants :\", consonants)\n",
+        "print(\"Digits :\", digits)\n",
+        "print(\"Spaces :\", spaces)\n",
+        "print(\"Special Characters :\", special)"
+      ],
+      "metadata": {
+        "id": "mEFR8dLpIRXn"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#37)\n",
+        "marks = list(map(int, input(\"Enter 10 marks: \").split()))\n",
+        "maximum = marks[0]\n",
+        "minimum = marks[0]\n",
+        "total = 0\n",
+        "first = second = -1\n",
+        "for mark in marks:\n",
+        "    total += mark\n",
+        "    if mark > maximum:\n",
+        "        maximum = mark\n",
+        "    if mark < minimum:\n",
+        "        minimum = mark\n",
+        "    if mark > first:\n",
+        "        second = first\n",
+        "        first = mark\n",
+        "    elif mark > second and mark != first:\n",
+        "        second = mark\n",
+        "average = total / len(marks)\n",
+        "count = 0\n",
+        "for mark in marks:\n",
+        "    if mark > average:\n",
+        "        count += 1\n",
+        "print(\"Maximum =\", maximum)\n",
+        "print(\"Minimum =\", minimum)\n",
+        "print(\"Average =\", average)\n",
+        "print(\"Students Above Average =\", count)\n",
+        "print(\"Second Highest =\", second)"
+      ],
+      "metadata": {
+        "id": "OSwj3VUbIeMW"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#38)\n",
+        "sentence = input(\"Enter sentence: \").lower()\n",
+        "words = sentence.split()\n",
+        "frequency = {}\n",
+        "for word in words:\n",
+        "    if word in frequency:\n",
+        "        frequency[word] += 1\n",
+        "    else:\n",
+        "        frequency[word] = 1\n",
+        "print(\"Word Frequencies\")\n",
+        "for word in frequency:\n",
+        "    print(word, \":\", frequency[word])\n",
+        "maximum = 0\n",
+        "most_word = \"\"\n",
+        "for word in frequency:\n",
+        "    if frequency[word] > maximum:\n",
+        "        maximum = frequency[word]\n",
+        "        most_word = word\n",
+        "print(\"Most Frequent Word =\", most_word)\n",
+        "print(\"Count =\", maximum)"
+      ],
+      "metadata": {
+        "id": "sekpT4z4ImoR"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#39)\n",
+        "states = {\n",
+        "    \"Karnataka\": \"Bengaluru\",\n",
+        "    \"Maharashtra\": \"Mumbai\",\n",
+        "    \"Telangana\": \"Hyderabad\",\n",
+        "    \"Tamil Nadu\": \"Chennai\",\n",
+        "    \"Odisha\": \"Bhubaneswar\"\n",
+        "}\n",
+        "while True:\n",
+        "    print(\"\\n1.Add\")\n",
+        "    print(\"2.Update\")\n",
+        "    print(\"3.Delete\")\n",
+        "    print(\"4.Search\")\n",
+        "    print(\"5.Display\")\n",
+        "    print(\"6.Exit\")\n",
+        "    choice = int(input(\"Enter choice: \"))\n",
+        "    if choice == 1:\n",
+        "        state = input(\"State: \")\n",
+        "        capital = input(\"Capital: \")\n",
+        "        states[state] = capital\n",
+        "      elif choice == 2:\n",
+        "        state = input(\"State: \")\n",
+        "        if state in states:\n",
+        "            states[state] = input(\"New Capital: \")\n",
+        "        else:\n",
+        "            print(\"State Not Found\")\n",
+        "    elif choice == 3:\n",
+        "        state = input(\"State: \")\n",
+        "        if state in states:\n",
+        "            del states[state]\n",
+        "        else:\n",
+        "            print(\"State Not Found\")\n",
+        "    elif choice == 4:\n",
+        "        state = input(\"State: \")\n",
+        "        if state in states:\n",
+        "            print(\"Capital =\", states[state])\n",
+        "        else:\n",
+        "            print(\"Not Found\")\n",
+        "    elif choice == 5:\n",
+        "        for state in sorted(states):\n",
+        "            print(state, \":\", states[state])\n",
+        "    elif choice == 6:\n",
+        "        break\n",
+        "    else:\n",
+        "        print(\"Invalid Choice\")\n"
+      ],
+      "metadata": {
+        "id": "BiV2Qt1fIsS4"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#40)\n",
+        "A = {\"Python\", \"Java\", \"C++\", \"SQL\"}\n",
+        "B = {\"Java\", \"JavaScript\", \"Python\", \"Go\", \"SQL\"}\n",
+        "print(\"Common =\", A & B)\n",
+        "print(\"Only A =\", A - B)\n",
+        "print(\"Only B =\", B - A)\n",
+        "print(\"All Languages =\", A | B)\n",
+        "print(\"Symmetric Difference =\", A ^ B)"
+      ],
+      "metadata": {
+        "id": "FUWAZz-YJBMx"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#41)\n",
+        "prices = (3845,3902,3878,3955,4012,3998,4055)\n",
+        "days = (\"Mon\",\"Tue\",\"Wed\",\"Thu\",\"Fri\",\"Sat\",\"Sun\")\n",
+        "max_price = max(prices)\n",
+        "min_price = min(prices)\n",
+        "print(\"Maximum =\", max_price, days[prices.index(max_price)])\n",
+        "print(\"Minimum =\", min_price, days[prices.index(min_price)])\n",
+        "average = sum(prices)/len(prices)\n",
+        "print(\"Average =\", average)\n",
+        "gain = prices[1]-prices[0]\n",
+        "day = \"\"\n",
+        "volatility = 0\n",
+        "for i in range(len(prices)-1):\n",
+        "    diff = prices[i+1]-prices[i]\n",
+        "    volatility += abs(diff)\n",
+        "    if diff > gain:\n",
+        "        gain = diff\n",
+        "        day = days[i]+\" to \"+days[i+1]\n",
+        "print(\"Biggest Gain =\", gain)\n",
+        "print(\"Between =\", day)\n",
+        "print(\"Volatility =\", volatility)"
+      ],
+      "metadata": {
+        "id": "wIlXc5ZGJKsf"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#42)\n",
+        "numbers = [1,2,3,2,5,7,8,5,6,9,8,10,4,11,12,13,14,15,15,16]\n",
+        "unique = set(numbers)\n",
+        "duplicates = []\n",
+        "single = []\n",
+        "for n in unique:\n",
+        "    count = numbers.count(n)\n",
+        "    if count >1:\n",
+        "        duplicates.append(n)\n",
+        "    else:\n",
+        "        single.append(n)\n",
+        "print(\"Unique =\", unique)\n",
+        "print(\"Duplicates =\", duplicates)\n",
+        "print(\"Appearing Once =\", single)"
+      ],
+      "metadata": {
+        "id": "SV6q7jdUJQyG"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#43)\n",
+        "text = input(\"Enter sentence: \")\n",
+        "clean = \"\"\n",
+        "for ch in text:\n",
+        "    if ch.isalnum():\n",
+        "        clean += ch.lower()\n",
+        "if clean == clean[::-1]:\n",
+        "    print(\"Palindrome\")\n",
+        "else:\n",
+        "    print(\"Not Palindrome\")"
+      ],
+      "metadata": {
+        "id": "g4gQi4FEJVxX"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#44)\n",
+        "sentence = input(\"Enter sentence: \")\n",
+        "words = sentence.split()\n",
+        "result = \"\"\n",
+        "for word in words:\n",
+        "    result += word[0].upper() + word[1:].lower() + \" \"\n",
+        "print(result)"
+      ],
+      "metadata": {
+        "id": "k4Lzx6o0Jbga"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#45)\n",
+        "text = input(\"Enter Message: \")\n",
+        "shift = int(input(\"Shift: \"))\n",
+        "cipher = \"\"\n",
+        "for ch in text:\n",
+        "    if ch.isalpha():\n",
+        "        if ch.isupper():\n",
+        "            cipher += chr((ord(ch)-65+shift)%26+65)\n",
+        "        else:\n",
+        "            cipher += chr((ord(ch)-97+shift)%26+97)\n",
+        "    else:\n",
+        "        cipher += ch\n",
+        "print(cipher)"
+      ],
+      "metadata": {
+        "id": "PYSDDZe1JgxZ"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#46)\n",
+        "def calculate_gst(amount,gst_rate=18,gst_inclusive=False):\n",
+        "    if gst_inclusive:\n",
+        "        base = amount/(1+gst_rate/100)\n",
+        "        gst = amount-base\n",
+        "        total = amount\n",
+        "    else:\n",
+        "        base = amount\n",
+        "        gst = amount*gst_rate/100\n",
+        "        total = amount+gst\n",
+        "    return round(base,2),round(gst,2),round(total,2)\n",
+        "print(calculate_gst(1000))\n",
+        "print(calculate_gst(1180,gst_inclusive=True))\n",
+        "print(calculate_gst(500,gst_rate=5))"
+      ],
+      "metadata": {
+        "id": "SQ2rFumNJmWO"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#47)\n",
+        "def power(base,exp):\n",
+        "    if exp==0:\n",
+        "        return 1\n",
+        "    elif exp<0:\n",
+        "        return 1/power(base,-exp)\n",
+        "    else:\n",
+        "        return base*power(base,exp-1)\n",
+        "print(power(2,10))\n",
+        "print(power(5,0))\n",
+        "print(power(3,-2))"
+      ],
+      "metadata": {
+        "id": "LajtVbfWJu2R"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#48)\n",
+        "import numpy as np\n",
+        "I = np.eye(5)\n",
+        "print(I)\n",
+        "I = I*10\n",
+        "print(I)\n",
+        "print(I.T)\n",
+        "print(np.sum(np.diag(I)))\n",
+        "print(np.sum(I))"
+      ],
+      "metadata": {
+        "id": "UmLpt8JgJzww"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#49)\n",
+        "import numpy as np\n",
+        "sales = np.array([12000,18500,14200,22100,19800,35200,28400])\n",
+        "days=[\"Mon\",\"Tue\",\"Wed\",\"Thu\",\"Fri\",\"Sat\",\"Sun\"]\n",
+        "print(\"Total =\",sales.sum())\n",
+        "print(\"Average =\",sales.mean())\n",
+        "print(\"Highest =\",days[np.argmax(sales)])\n",
+        "print(\"Above Average =\",np.sum(sales>sales.mean()))\n",
+        "growth=((sales[-1]-sales[0])/sales[0])*100\n",
+        "print(\"Growth =\",growth,\"%\")\n",
+        "change=((sales[1:]-sales[:-1])/sales[:-1])*100\n",
+        "print(change)"
+      ],
+      "metadata": {
+        "id": "M2fbVyASJ2R_"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#50)\n",
+        "import numpy as np\n",
+        "arr = np.ones((5,5),dtype=int)\n",
+        "arr[1:4,1:4]=0\n",
+        "print(arr)"
+      ],
+      "metadata": {
+        "id": "_kP7GNahJ8Ds"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
